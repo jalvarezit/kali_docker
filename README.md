@@ -4,7 +4,7 @@
 ## Setup
 
  1. Clone the repository: 
-	 `git clone https://github.com/itasahobby/KaliLinux_docker.git`
+	 `git clone https://github.com/itasahobby/kali_docker.git`
  2. Build the container:
 	 `docker build -t kali .\` 
 3. Create an instance in the background of the container:
