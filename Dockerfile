@@ -54,6 +54,10 @@ RUN apt-get install -y zsh &&\
 ADD .zshrc /root/.zshrc
 ADD .p10k.zsh /root/.p10k.zsh
 
+# Makes sure they are on linux formatting
+RUN dos2unix .p10k.zsh &&\
+  dos2unix .zshrc
+
 # Openvpn config files
 RUN mkdir -p /root/Documents/vpn/ 
 ADD htb.ovpn /root/Documents/vpn/htb.ovpn
