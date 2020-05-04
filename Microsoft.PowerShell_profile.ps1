@@ -1,9 +1,9 @@
 function Kali-Build{
-	docker build -t kali D:\Users\josea\Documents\docker\kali_docker\
+	docker build -t kali \path\to\kali_docker\
 }
 
 function Kali-Start{
-	docker run -td --name kali -v D:\Users\josea\Documents\docker\kali_docker\shared:/root/Documents/shared --network host --privileged -e DISPLAY=192.168.1.66:0.0 kali
+	docker run -td --name kali -v \path\to\kali_docker\kali_docker\shared:/root/Documents/shared --network host --privileged -e DISPLAY=192.168.1.66:0.0 kali
 }
 
 function Kali-Connect{
