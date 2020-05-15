@@ -6,3 +6,6 @@ source /root/powerlevel10k/powerlevel10k.zsh-theme
 # Custom bindkeys
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# Change directory when connecting
+cd /root
