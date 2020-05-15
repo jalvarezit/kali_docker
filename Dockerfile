@@ -55,13 +55,13 @@ ADD .zshrc /root/.zshrc
 ADD .p10k.zsh /root/.p10k.zsh
 
 # Makes sure they are on linux formatting
-RUN dos2unix .p10k.zsh &&\
-  dos2unix .zshrc
+RUN dos2unix /root/.p10k.zsh &&\
+  dos2unix /root/.zshrc
 
 # Openvpn config files
-RUN mkdir -p /root/Documents/vpn/ 
-ADD htb.ovpn /root/Documents/vpn/htb.ovpn
-ADD thm.ovpn /root/Documents/vpn/thm.ovpn
+RUN mkdir -p /root/vpn/ 
+ADD htb.ovpn /root/vpn/htb.ovpn
+ADD thm.ovpn /rootvpn/thm.ovpn
 
 RUN apt-get autoremove -y && \
   apt-get clean
