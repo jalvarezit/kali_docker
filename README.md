@@ -20,7 +20,7 @@
   
  - DISPLAY is used to connect to XLaunch on the host machine to be able to run gui applications on the container and display them in the host. 
  
- - In the dockerfile there it also adds [TryHackMe/](https://tryhackme.com/) and [HackTheBox](https://www.hackthebox.eu/) openvpn config files. Remember to include them in the same folder as the *Dockerfile* . However If you don't want to include this feature just delete the following lines:
+ - In the dockerfile there it also adds [TryHackMe](https://tryhackme.com/) and [HackTheBox](https://www.hackthebox.eu/) openvpn config files. Remember to include them in the same folder as the *Dockerfile* . However If you don't want to include this feature just delete the following lines:
 	 ```
 	 RUN mkdir -p /root/Documents/vpn/
 	ADD htb.ovpn /root/Documents/vpn/htb.ovpn
@@ -43,6 +43,10 @@
 	ADD .p10k.zsh /root/.p10k.zsh
 	 ```
 	If so remember to delete `.zshrc` and `.p10k.zsh`
+
+## Visual example
+![Shell example](https://raw.githubusercontent.com/itasahobby/kali_docker/master/img/Shell.PNG)  
+Example connecting to the docker using Windows Terminal and the functions included in the [repo profile](https://github.com/itasahobby/kali_docker/blob/master/Microsoft.PowerShell_profile.ps1).
 
 ## Credits
 Credits to [Fedeya](https://github.com/Fedeya) as this Docker container is mainly based on his version.
