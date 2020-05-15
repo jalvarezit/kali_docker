@@ -3,7 +3,7 @@ function Kali-Build{
 }
 
 function Kali-Start{
-	docker run -td --name kali -v \path\to\kali_docker\kali_docker\shared:/root/Documents/shared --network host --privileged -e DISPLAY=192.168.1.66:0.0 kali
+	docker run -td --name kali -v \path\to\kali_docker\kali_docker\shared:/root/shared --network host --privileged -e DISPLAY=192.168.1.66:0.0 kali
 }
 
 function Kali-Connect{
