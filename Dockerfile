@@ -16,14 +16,22 @@ RUN apt-get -y update && apt-get -y upgrade && \
   wfuzz \
   iputils-ping \
   binwalk \
+  exploitdb \
   fcrackzip \
-  hashcat \
+  # Also includes other libraries so hashcat can run using cpu
+  hashcat libhwloc-dev ocl-icd-dev ocl-icd-opencl-dev pocl-opencl-icd \
   nikto \
   net-tools \
   bash-completion \
   python3-pip \
   dos2unix \
-  vim
+  vim \
+  windows-binaries \ 
+  theharvester \
+  python3 \
+  pdfcrack && \
+  pip3 install stegcracker &&\
+  pip3 install usbrip
 
   # Install xsstrike
 RUN mkdir -p /opt/xsstrike &&\
@@ -38,7 +46,23 @@ RUN mkdir -p /opt/xsstrike &&\
   # Install chrome
   wget -O /root/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb &&\
   apt-get install -y /root/chrome.deb &&\
-  rm /root/chrome.deb
+  rm /root/chrome.deb &&\
+  # Install hash-id
+  mkdir -p /opt/hash-id &&\
+  git clone https://github.com/blackploit/hash-identifier.git /opt/hash-id &&\
+  echo python3 /opt/hash-id/hash-id.py > /opt/hash-id/hash-id.sh &&\
+  chmod u+x /opt/hash-id/hash-id.sh &&\
+  chmod u+x /opt/hash-id/hash-id.py &&\
+  ln -s /opt/hash-id/hash-id.sh /usr/bin/hash-id &&\
+  # Install arjun
+  mkdir -p /opt/arjun &&\
+  git clone https://github.com/s0md3v/Arjun.git /opt/arjun/ &&\
+  chmod u+x /opt/arjun/arjun.py &&\
+  ln -s /opt/arjun/arjun.py /usr/bin/arjun
+  # Install impacket toolkit
+  #git clone git clone https://github.com/SecureAuthCorp/impacket /root/impacket &&\
+  #pip3 install -r /root/impacket/requirements.txt &&\
+  #python3 /root/impacket/setup.py install
 
 # Setup zsh
 
