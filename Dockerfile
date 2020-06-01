@@ -9,6 +9,7 @@ RUN apt-get -y update && apt-get -y upgrade && \
   kali-linux-core \
   kali-tools-top10 \
   dirb \
+  whatweb \
   dirbuster \
   git \
   pciutils \
@@ -17,6 +18,7 @@ RUN apt-get -y update && apt-get -y upgrade && \
   iputils-ping \
   binwalk \
   exploitdb \
+  enum4linux \
   fcrackzip \
   # Also includes other libraries so hashcat can run using cpu
   hashcat libhwloc-dev ocl-icd-dev ocl-icd-opencl-dev pocl-opencl-icd \
@@ -29,16 +31,28 @@ RUN apt-get -y update && apt-get -y upgrade && \
   windows-binaries \ 
   theharvester \
   python3 \
+  smbmap \
   pdfcrack && \
   pip3 install stegcracker &&\
   pip3 install usbrip
 
-  # Install xsstrike
-RUN mkdir -p /opt/xsstrike &&\
-  git clone https://github.com/s0md3v/XSStrike.git /opt/xsstrike &&\
-  chmod +x /opt/xsstrike/xsstrike.py &&\
-  ln -s /opt/xsstrike/xsstrike.py /usr/bin/xsstrike &&\
-  xsstrike &&\
+RUN mkdir -p /root/Downloads &&\
+  mkdir -p /root/Documents &&\
+  # Install impacket
+  git clone https://github.com/SecureAuthCorp/impacket.git /root/Downloads/impacket &&\
+  pip3 install -r /root/Downloads/impacket/requirements.txt &&\
+  cd /root/Downloads/impacket/ &&\
+  python3 /root/Downloads/impacket/setup.py install &&\
+  sed -i  "s/^#\!.*/#\!\/usr\/bin\/python3/" /root/Downloads/impacket/examples/*.py &&\
+  find /root/Downloads/impacket/examples/* | xargs -I {} bash -c 'mv $1 "${1%.*}"' _ {} &&\
+  mv /root/Downloads/impacket/examples/* /usr/bin &&\
+  rm -fr /root/Downloads/impacket &&\
+  # Ccat
+  wget https://github.com/jingweno/ccat/releases/download/v1.1.0/linux-amd64-1.1.0.tar.gz -O /root/Downloads/ccat.tar.gz &&\
+  cd /root/Downloads/ &&\
+  tar xfz /root/Downloads/ccat.tar.gz &&\
+  cp /root/Downloads/linux-amd64-1.1.0/ccat /usr/bin/ &&\
+  rm /root/Downloads/ccat.tar.gz /root/Downloads/linux-amd64-1.1.0 &&\
   # Install dirsearch
   mkdir -p /opt/dirsearch &&\
   git clone https://github.com/maurosoria/dirsearch.git /opt/dirsearch &&\
@@ -58,11 +72,11 @@ RUN mkdir -p /opt/xsstrike &&\
   mkdir -p /opt/arjun &&\
   git clone https://github.com/s0md3v/Arjun.git /opt/arjun/ &&\
   chmod u+x /opt/arjun/arjun.py &&\
-  ln -s /opt/arjun/arjun.py /usr/bin/arjun
-  # Install impacket toolkit
-  #git clone git clone https://github.com/SecureAuthCorp/impacket /root/impacket &&\
-  #pip3 install -r /root/impacket/requirements.txt &&\
-  #python3 /root/impacket/setup.py install
+  ln -s /opt/arjun/arjun.py /usr/bin/arjun &&\
+  wget https://github.com/Peltoche/lsd/releases/download/0.17.0/lsd-musl_0.17.0_amd64.deb -O /root/Downloads/lsd.deb &&\
+  dpkg -i /root/Downloads/lsd.deb &&\
+  rm /root/Downloads/lsd.deb &&\
+  updatedb
 
 # Setup zsh
 
