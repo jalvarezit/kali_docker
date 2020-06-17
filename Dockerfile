@@ -16,6 +16,7 @@ RUN apt-get install -y \
   whatweb \
   dirbuster \
   git \
+  wget \
   pciutils \
   beef-xss \
   wfuzz \
@@ -46,20 +47,20 @@ RUN apt-get install -y \
   python3 /root/Downloads/impacket/setup.py install &&\
   sed -i  "s/^#\!.*/#\!\/usr\/bin\/python3/" /root/Downloads/impacket/examples/*.py &&\
   find /root/Downloads/impacket/examples/* | xargs -I {} bash -c 'mv $1 "${1%.*}"' _ {} &&\
+  cd /root &&\
   mv /root/Downloads/impacket/examples/* /usr/bin &&\
   rm -fr /root/Downloads/impacket &&\
   # Install hash-id
-  mkdir -p /opt/hash-id &&\
   git clone https://github.com/blackploit/hash-identifier.git /opt/hash-id &&\
   echo python3 /opt/hash-id/hash-id.py > /opt/hash-id/hash-id.sh &&\
   chmod u+x /opt/hash-id/hash-id.sh &&\
   chmod u+x /opt/hash-id/hash-id.py &&\
   ln -s /opt/hash-id/hash-id.sh /usr/bin/hash-id &&\
   # Install dirsearch
-  mkdir -p /opt/dirsearch &&\
+  #mkdir -p /opt/dirsearch &&\
   git clone https://github.com/maurosoria/dirsearch.git /opt/dirsearch &&\
   ln -s /opt/dirsearch/dirsearch.py /usr/bin/dirsearch &&\
-  # Install arjun
+  #Install arjun
   mkdir -p /opt/arjun &&\
   git clone https://github.com/s0md3v/Arjun.git /opt/arjun/ &&\
   chmod u+x /opt/arjun/arjun.py &&\
@@ -67,9 +68,8 @@ RUN apt-get install -y \
   updatedb
 
 # General purpose tools
-RUN 
-# Ccat
-  wget https://github.com/jingweno/ccat/releases/download/v1.1.0/linux-amd64-1.1.0.tar.gz -O /root/Downloads/ccat.tar.gz &&\
+  # ccat
+RUN wget https://github.com/jingweno/ccat/releases/download/v1.1.0/linux-amd64-1.1.0.tar.gz -O /root/Downloads/ccat.tar.gz &&\
   cd /root/Downloads/ &&\
   tar xfz /root/Downloads/ccat.tar.gz &&\
   cp /root/Downloads/linux-amd64-1.1.0/ccat /usr/bin/ &&\
@@ -81,7 +81,8 @@ RUN
   # Install lsd
   wget https://github.com/Peltoche/lsd/releases/download/0.17.0/lsd-musl_0.17.0_amd64.deb -O /root/Downloads/lsd.deb &&\
   dpkg -i /root/Downloads/lsd.deb &&\
-  rm /root/Downloads/lsd.deb
+  rm /root/Downloads/lsd.deb &&\
+  apt-get install -y dnsutils
 
 # Setup locales
 RUN apt-get install -y locales locales-all
@@ -102,7 +103,7 @@ RUN dos2unix /root/.p10k.zsh &&\
 
 # Openvpn config files
 ADD htb.ovpn /root/vpn/htb.ovpn
-ADD thm.ovpn /rootvpn/thm.ovpn
+ADD thm.ovpn /root/vpn/thm.ovpn
 
 RUN apt-get autoremove -y && \
   apt-get clean
