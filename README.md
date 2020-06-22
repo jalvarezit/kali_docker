@@ -30,8 +30,8 @@ Available commands are:
 3. Configure Windows Terminal:
     1. Install [Windows Terminal](https://www.microsoft.com/es-es/p/windows-terminal/9n0dx20hk701#)
     2. Open Windows Terminal and type `notepad $Profile`, then copy the content of _Microsoft.Powershell_profile.ps1_ in there. Alternatively you can paste the file to *C:/Users/**user**/Documents/WindowsPowerShell/*
-    3. Open Windows Terminal's settings and copy the content of **config.json** (it can also be opened with Ctrl + , using default shortcuts). Alternatively you can paste the file to *C:/Users/**user**/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/profiles.json*
-    4. Save the backgrounds to *%LOCALAPPDATA%/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/RoamingState*. Remember that the name of the image must match the **config.json** parameter mentioned in the previous step. Adittionaly there are some sample background images in the *img* folder inside the repository.
+    3. Open Windows Terminal's settings and copy the content of **settings.json** (it can also be opened with Ctrl + , using default shortcuts). Alternatively you can paste the file to *C:/Users/**user**/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json*
+    4. Save the backgrounds to *%LOCALAPPDATA%/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/RoamingState*. Remember that the name of the image must match the **settings.json** parameter mentioned in the previous step. Adittionaly there are some sample background images in the *img* folder inside the repository.
     5. If you are using zsh with the container, you have to install [Powerlevel10k fonts](https://github.com/romkatv/powerlevel10k#manual-font-installation).
 4. Setup X11 Server:
     1. Install vcxsrv with `choco install vcxsrv`
